@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/cate/main",
+    "pages/detail/main"],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "美女图片",
+    "navigationBarTextStyle": "white"
+  }
+}

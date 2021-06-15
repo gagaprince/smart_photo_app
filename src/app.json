@@ -5,8 +5,8 @@
     "pages/detail/main"],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#000",
-    "navigationBarTitleText": "美女图片",
+    "navigationBarBackgroundColor": "#ffc0cb",
+    "navigationBarTitleText": "每日美图",
     "navigationBarTextStyle": "white"
   }
 }

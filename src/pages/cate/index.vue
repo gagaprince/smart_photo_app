@@ -2,44 +2,81 @@
   <div class="frame">
     <div class="cate">
       <div class="label">
-        <div class="left-label">清纯美人</div>
+        <div class="left-label">{{cate}}</div>
         <div class="right-label">图片收集于网络,如有侵权立刻删除</div>  
       </div>
-      <div class="pics2">
-        <div class="img-frame"><img mode="aspectFill" src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.lianzhixiu.com%2Fuploads%2Fallimg%2F202105%2F9999%2F22339fe1a7.jpg"></div>
-        <div class="img-frame"><img mode="aspectFill" src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.lianzhixiu.com%2Fuploads%2Fallimg%2F202101%2F9999%2Fe4abd4391b.jpg"></div>
+
+      <div class="pics2" v-for="(rows,index) in rowsDataArr" :key="index">
+        <div class="img-frame" v-if="rows[0]"><common-card :imgurl="rows[0].url" size="320" :photoId="rows[0].id"></common-card></div>
+        <div class="img-frame" v-if="rows[1]"><common-card :imgurl="rows[1].url" size="320" :photoId="rows[1].id"></common-card></div>
       </div>
-      <div class="pics2">
-        <div class="img-frame"><img mode="aspectFill" src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.lianzhixiu.com%2Fuploads%2Fallimg%2F202105%2F9999%2F22339fe1a7.jpg"></div>
-        <div class="img-frame"><img mode="aspectFill" src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.lianzhixiu.com%2Fuploads%2Fallimg%2F202101%2F9999%2Fe4abd4391b.jpg"></div>
-      </div>
-      <div class="pics2">
-        <div class="img-frame"><img mode="aspectFill" src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.lianzhixiu.com%2Fuploads%2Fallimg%2F202105%2F9999%2F22339fe1a7.jpg"></div>
-        <div class="img-frame"><img mode="aspectFill" src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.lianzhixiu.com%2Fuploads%2Fallimg%2F202101%2F9999%2Fe4abd4391b.jpg"></div>
-      </div>
+    </div>
+    <div class="more-btn-frame" v-if="dataArr.length>0">
+      <div class="more-btn" @click="fetchMore">加载更多</div>
     </div>
   </div>
   
 </template>
 
 <script>
-import card from '@/components/card'
+import commonCard from '@/components/common-card'
+import {request} from '../../utils/request';
 
 export default {
   data () {
-    return {}
+    return {
+      page:0,
+      cate:"",
+      dataArr:[]
+    }
   },
 
   components: {
-    card
+    "common-card":commonCard
   },
+
+   computed:{
+     rowsDataArr(){
+       const rowsData = [];
+       this.dataArr.forEach((item,index)=>{
+         if(index%2==0){
+           rowsData.push([item,this.dataArr[index+1]]);
+         }
+       });
+       return rowsData;
+     }
+   },
 
   methods: {
-    
+    fetchDataByPage(cate){
+      request({
+            url:'/smart-photo/api/getCateDataPage',
+            data:{
+                cate,pno:this.page
+            }
+        }).then((res)=>{
+            console.log(res);
+            if(res.code==0){
+                this.dataArr = this.dataArr.concat(res.data);
+                this.page++;
+            }else{
+                console.log('catedata is empty');
+            }
+        }).catch((e)=>{
+            console.log(e);
+        });
+    },
+    fetchMore(){
+      this.fetchDataByPage(this.cate);
+    }
   },
 
-  onLoad(page){
-    console.log(page);
+  onLoad(opt){
+    this.page=0;
+    this.dataArr=[];
+    const {cate} = opt;
+    this.cate = cate;
+    this.fetchDataByPage(cate);
   },
 
   created () {
@@ -74,24 +111,6 @@ export default {
     top:50%;
     margin-top:-15rpx;
   }
-  .pics{
-    display: flex;
-    margin-top:20rpx;
-  }
-  .pics .img-frame{
-    width:150rpx;
-    height:150rpx;
-    overflow: hidden;
-    border-radius: 20rpx;
-    margin-right: 30rpx;
-  }
-  .pics .img-frame:last-child{
-    margin-right: 0;
-  }
-  .pics .img-frame image{
-    width:100%;
-    height:100%;
-  }
   .cate{
     margin-top:10rpx;
   }
@@ -113,6 +132,23 @@ export default {
   .pics2 .img-frame image{
     width:100%;
     height:100%;
+  }
+  .more-btn-frame{
+    display: flex;
+    width:100%;
+    justify-content: center; 
+    align-items: center;
+    height:100rpx;
+    margin: 10rpx 0 0 0;
+  }
+  .more-btn{
+    width:70%;
+    height:70rpx;
+    background: pink;
+    text-align: center;
+    line-height: 70rpx;
+    color: #fff;
+    font-size: 30rpx;
   }
 
 </style>

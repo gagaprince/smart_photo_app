@@ -1,7 +1,7 @@
 <template>
   <div class="frame">
     <div class="card-item" v-for="detail in detailData" :key="detail.id">
-        <detail-card :imgurl="detail.url" :title="detail.title"></detail-card>
+        <detail-card :imgurl="detail.url" :title="detail.title" :detailId="detail.id"></detail-card>
     </div>
   </div>
 </template>
@@ -12,6 +12,7 @@ import {request} from '../../utils/request';
 export default {
   data () {
     return {
+      id:0,
       detailData:[]
     };
   },
@@ -42,11 +43,20 @@ export default {
   },
 
   onLoad({id}){
+    this.id = id;
     this.fetchDetail(id);
   },
 
   created () {
     // let app = getApp()
+  },
+  onShareAppMessage(res){
+      const imageUrl = res.target.dataset.url||`https://ip.webmasterapi.com/api/imageproxy/375x300,sc/${this.detailData[0].url}`;
+      return {
+        title: '这么甜美的女生你见过吗?',
+        imageUrl,
+        path: `/pages/detail/main?id=${this.id}`,
+    }
   }
 }
 </script>

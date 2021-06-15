@@ -9,10 +9,10 @@ export default {
   props: ['imgurl','size','photoId'],
   computed:{
       encodeUrl(){
-          return `https://images.weserv.nl/?url=${encodeURIComponent(this.imgurl)}`;
+          // return `https://images.weserv.nl/?url=${encodeURIComponent(this.imgurl)}`;
           // return `https://imageproxy.pimg.tw/resize?url=${encodeURIComponent(this.imgurl)}`;
           // return `https://pic1.xuehuaimg.com/proxy/${encodeURIComponent(this.imgurl)}`;
-          
+          return `https://ip.webmasterapi.com/api/imageproxy/${this.size}x${this.size},sc/${this.imgurl}`;
       },
       imgFrameStyle(){
           return `width:${this.size}rpx;height:${this.size}rpx;`
@@ -33,6 +33,7 @@ export default {
     height:150rpx;
     overflow: hidden;
     border-radius: 20rpx;
+    background: #efefef;
   }
   .img-frame image{
     width:100%;

@@ -15,19 +15,19 @@
     </div>
     <div v-if="cateData && cateData.length>0" >
       <div class="cate" v-for="cateObj in cateData" :key="cateObj.cate">
-        <div class="label">
+        <div class="label" @click="jumpToCatePage(cateObj.cate)">
           <div class="left-label">{{cateObj.cate}}</div>
-          <div class="right-label"><img class="arrow" src="https://p0.meituan.net/travelcube/ec88becb40e648158328f5ba7e91e42a5034.png" alt=""></div>  
+          <div class="right-label" ><img class="arrow" src="https://p0.meituan.net/travelcube/ec88becb40e648158328f5ba7e91e42a5034.png" alt=""></div>  
         </div>
-        <div class="pics2">
+        <div class="pics2" v-if="cateObj.infos.length>=2">
           <div class="img-frame"><common-card :imgurl="cateObj.infos[0].url" size="320" :photoId="cateObj.infos[0].id"></common-card></div>
           <div class="img-frame"><common-card :imgurl="cateObj.infos[1].url" size="320" :photoId="cateObj.infos[1].id"></common-card></div>
         </div>
-        <div class="pics2">
+        <div class="pics2" v-if="cateObj.infos.length>=4">
           <div class="img-frame"><common-card :imgurl="cateObj.infos[2].url" size="320" :photoId="cateObj.infos[2].id"></common-card></div>
           <div class="img-frame"><common-card :imgurl="cateObj.infos[3].url" size="320" :photoId="cateObj.infos[3].id"></common-card></div>
         </div>
-        <div class="pics2">
+        <div class="pics2" v-if="cateObj.infos.length>=6">
           <div class="img-frame"><common-card :imgurl="cateObj.infos[4].url" size="320" :photoId="cateObj.infos[4].id"></common-card></div>
           <div class="img-frame"><common-card :imgurl="cateObj.infos[5].url" size="320" :photoId="cateObj.infos[5].id"></common-card></div>
         </div>
@@ -99,6 +99,10 @@ export default {
         console.log(e);
       })
     },
+    jumpToCatePage(cate){
+      const url = `/pages/cate/main?cate=${cate}`;
+      wx.navigateTo({url});
+    }
   },
 
   onPullDownRefresh () {

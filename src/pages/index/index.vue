@@ -1,5 +1,8 @@
 <template>
   <div class="frame">
+    <div style="margin-bottom:10px;">
+      <ad unit-id="adunit-d771717f8b882937"></ad>
+    </div>
     <div class="tj" v-if="hotData && hotData.length>0">
       <div class="label">每日精选</div>
       <div class="pics" v-if="topHot.length>=4">
@@ -17,7 +20,7 @@
       <div class="cate" v-for="cateObj in cateData" :key="cateObj.cate">
         <div class="label" @click="jumpToCatePage(cateObj.cate)">
           <div class="left-label">{{cateObj.cate}}</div>
-          <div class="right-label" ><img class="arrow" src="https://p0.meituan.net/travelcube/ec88becb40e648158328f5ba7e91e42a5034.png" alt=""></div>  
+          <div class="right-label" ><p>查看更多</p><img class="arrow" src="https://p0.meituan.net/travelcube/ec88becb40e648158328f5ba7e91e42a5034.png" alt=""></div>  
         </div>
         <div class="pics2" v-if="cateObj.infos.length>=2">
           <div class="img-frame"><common-card :imgurl="cateObj.infos[0].url" size="320" :photoId="cateObj.infos[0].id"></common-card></div>
@@ -140,7 +143,12 @@ export default {
     flex:1;
   }
   .right-label{
-    width:100rpx;
+    width:200rpx;
+    color: #afafaf;
+    font-size: 30rpx;
+    text-align: right;
+    line-height: 55rpx;
+    padding-right:30rpx;
     position: relative;
   }
   .arrow{

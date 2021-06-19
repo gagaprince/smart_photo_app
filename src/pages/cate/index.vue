@@ -5,11 +5,18 @@
         <div class="left-label">{{cate}}</div>
         <div class="right-label">图片收集于网络,如有侵权立刻删除</div>  
       </div>
-
-      <div class="pics2" v-for="(rows,index) in rowsDataArr" :key="index">
-        <div class="img-frame" v-if="rows[0]"><common-card :imgurl="rows[0].url" size="320" :photoId="rows[0].id"></common-card></div>
-        <div class="img-frame" v-if="rows[1]"><common-card :imgurl="rows[1].url" size="320" :photoId="rows[1].id"></common-card></div>
+      <div v-for="(rows,index) in rowsDataArr" :key="index">
+        <div class="pics2">
+          <div class="img-frame" v-if="rows[0]"><common-card :imgurl="rows[0].url" size="320" :photoId="rows[0].id"></common-card></div>
+          <div class="img-frame" v-if="rows[1]"><common-card :imgurl="rows[1].url" size="320" :photoId="rows[1].id"></common-card></div>
+        </div>
+        <div v-if="index==3" style="margin-top:20px;">
+          <ad unit-id="adunit-47e4be69c30312de"></ad>
+        </div>
       </div>
+    </div>
+    <div style="margin-top:10px;">
+      <ad unit-id="adunit-cfca5c4948f989ca" ad-type="video" ad-theme="white"></ad>
     </div>
     <div class="more-btn-frame" v-if="dataArr.length>0">
       <div class="more-btn" @click="fetchMore">加载更多</div>

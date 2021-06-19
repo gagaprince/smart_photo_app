@@ -21,10 +21,12 @@ export default {
         //   return `https://images.weserv.nl/?url=${encodeURIComponent(this.imgurl)}`;
         // return `https://imageproxy.pimg.tw/resize?url=${encodeURIComponent(this.imgurl)}`;
         // return `https://pic1.xuehuaimg.com/proxy/${encodeURIComponent(this.imgurl)}`;
-        return `https://ip.webmasterapi.com/api/imageproxy/750x/${this.imgurl}`;
+        // return `https://ip.webmasterapi.com/api/imageproxy/750x/${this.imgurl}`;
+        return this.imgurl;
       },
       shareImg(){
-          return `https://ip.webmasterapi.com/api/imageproxy/375x300,sc/${this.imgurl}`;
+        //   return `https://ip.webmasterapi.com/api/imageproxy/375x300,sc/${this.imgurl}`;
+        return this.imgurl.replace('750x','375x300,sc');
       }
   },
   methods:{

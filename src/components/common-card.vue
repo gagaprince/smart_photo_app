@@ -12,7 +12,8 @@ export default {
           // return `https://images.weserv.nl/?url=${encodeURIComponent(this.imgurl)}`;
           // return `https://imageproxy.pimg.tw/resize?url=${encodeURIComponent(this.imgurl)}`;
           // return `https://pic1.xuehuaimg.com/proxy/${encodeURIComponent(this.imgurl)}`;
-          return `https://ip.webmasterapi.com/api/imageproxy/${this.size}x${this.size},sc/${this.imgurl}`;
+          // return `https://ip.webmasterapi.com/api/imageproxy/${this.size}x${this.size},sc/${this.imgurl}`;
+          return this.imgurl;
       },
       imgFrameStyle(){
           return `width:${this.size}rpx;height:${this.size}rpx;`

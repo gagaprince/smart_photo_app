@@ -1,7 +1,10 @@
 <template>
   <div class="frame">
-    <div class="card-item" v-for="detail in detailData" :key="detail.id">
+    <div class="card-item" v-for="(detail,index) in detailData" :key="detail.id">
         <detail-card :imgurl="detail.url" :title="detail.title" :detailId="detail.id"></detail-card>
+        <div v-if="index==0">
+            <ad unit-id="adunit-7f3baa5786787e9d"></ad>
+        </div>
     </div>
   </div>
 </template>
@@ -39,12 +42,39 @@ export default {
         }).catch((e)=>{
             console.log(e);
         })
+    },
+    initAD(){
+        // 在页面中定义插屏广告
+        let interstitialAd = null
+        console.log('initAD');
+        console.log(wx.createInterstitialAd);
+
+        // 在页面onLoad回调事件中创建插屏广告实例
+        if (wx.createInterstitialAd) {
+            console.log('init interstitialAd');
+            interstitialAd = wx.createInterstitialAd({
+                adUnitId: 'adunit-4ada6be552504e7b'
+            })
+            interstitialAd.onLoad(() => {
+                console.log('interstitialAd load');
+                // 在适合的场景显示插屏广告
+                if (interstitialAd) {
+                    interstitialAd.show().catch((err) => {
+                        console.error(err)
+                    })
+                }
+            })
+            interstitialAd.onError((err) => {})
+            interstitialAd.onClose(() => {})
+        }
+
     }
   },
 
   onLoad({id}){
     this.id = id;
     this.fetchDetail(id);
+    this.initAD();
   },
 
   created () {

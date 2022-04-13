@@ -3,7 +3,7 @@
     <div style="margin-bottom:10px;">
       <ad unit-id="adunit-d771717f8b882937"></ad>
     </div>
-    <!-- <div class="tj" v-if="hotData && hotData.length>0">
+    <div class="tj" v-if="hotData && hotData.length>0">
       <div class="label">每日精选</div>
       <div class="pics" v-if="topHot.length>=4">
         <div class="img-frame" v-for="hot in topHot" :key="hot.id">
@@ -35,7 +35,7 @@
           <div class="img-frame"><common-card :imgurl="cateObj.infos[5].url" size="320" :photoId="cateObj.infos[5].id"></common-card></div>
         </div>
       </div>  
-    </div> -->
+    </div>
     
   </div>
   
@@ -74,24 +74,17 @@ export default {
 
   methods: {
     test(){
-      wx.cloud.init({
-        "env": "prod-3ggdr11dab400c61"
-      })
-      wx.cloud.callContainer({
-        "path": "/api/count",
-        "header": {
-          "X-WX-SERVICE": "wxcloudrun-koa"
-        },
-        "method": "POST",
-        "data": {
-          "action": "inc"
-        }
-      })
+      
+      
     },
     fetchHot(){
       return request({
-        url:'/smart-photo/api/getHotDaliy'
+        url:'/smart-photo/api/getHotDaliy',
+        data:{
+          version:1
+        }
       }).then((res)=>{
+        console.log('getHotDaliy ret');
         console.log(res);
         if(res.code==0){
           this.hotData = res.data;
@@ -104,7 +97,10 @@ export default {
     },
     fetchCate(){
       return request({
-        url:'/smart-photo/api/getAllCateData'
+        url:'/smart-photo/api/getAllCateData',
+        data:{
+          version:1
+        }
       }).then((res)=>{
         console.log(res);
         if(res.code==0){
@@ -131,9 +127,9 @@ export default {
   },
 
   onLoad(){
-    this.test();
-    // this.fetchHot();
-    // this.fetchCate();
+    // this.test();
+    this.fetchHot();
+    this.fetchCate();
   },
 
   created () {

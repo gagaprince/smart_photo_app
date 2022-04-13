@@ -59,7 +59,8 @@ export default {
       request({
             url:'/smart-photo/api/getCateDataPage',
             data:{
-                cate,pno:this.page
+                cate,pno:this.page,
+                version:1,
             }
         }).then((res)=>{
             console.log(res);

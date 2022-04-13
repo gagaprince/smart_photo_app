@@ -30,7 +30,8 @@ export default {
         request({
             url:'/smart-photo/api/getDetail',
             data:{
-                id
+                id,
+                version:1,
             }
         }).then((res)=>{
             console.log(res);

@@ -7,6 +7,9 @@ export default {
         console.log(code);
       }
     })
+    wx.cloud.init({
+      "env": "prod-3ggdr11dab400c61"
+    })
   }
 }
 </script>

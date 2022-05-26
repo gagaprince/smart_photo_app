@@ -23,6 +23,8 @@
     "build": "node build/build.js wx"
   },
   "dependencies": {
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "mpvue": "^2.0.0"
   },
   "devDependencies": {

@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/smallvideo/index/main",
+    "pages/smallvideo/video/main",
+    "pages/smallvideo/photo/main",
+    "pages/smallvideo/center/main",
     "pages/index/main",
     "pages/cate/main",
     "pages/detail/main"],

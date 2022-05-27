@@ -32,6 +32,9 @@ export default {
     saveVideo(){
       const _this = this;
       const videoData = this.videoData||{};
+      wx.showLoading({
+        title:'下载中'
+      });
       const downloadTask = wx.downloadFile({
         url: videoData.videoUrl, 
         success (res) {
@@ -39,6 +42,7 @@ export default {
           wx.saveVideoToPhotosAlbum({
             filePath: res.tempFilePath,
             success(res) {
+              wx.hideLoading();
               wx.showToast({
                 title:'下载成功'
               })

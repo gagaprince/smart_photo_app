@@ -4,13 +4,14 @@
     "pages/smallvideo/video/main",
     "pages/smallvideo/photo/main",
     "pages/smallvideo/center/main",
+    "pages/smallvideo/learn/main",
     "pages/index/main",
     "pages/cate/main",
     "pages/detail/main"],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#ffc0cb",
-    "navigationBarTitleText": "每日美图",
+    "navigationBarTitleText": "短视频提取器",
     "navigationBarTextStyle": "white"
   }
 }

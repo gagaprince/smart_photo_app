@@ -1,5 +1,6 @@
 <template>
   <div v-if="videoData" class="video-fr">
+    <ad unit-id="adunit-4ae01ae4bece7cbc" ad-type="video" ad-theme="white"></ad>
     <video class="video-content" :src="videoData.videoUrl" :poster="videoData.cover"></video>
     <div class="btn-fr">
       <div class="btn-save" @tap="saveVideo">保存视频{{showProgress}}</div>
@@ -10,6 +11,7 @@
 
 <script>
 import {request} from '../../../utils/request';
+import {showInterstitialAd} from '../../../utils/adUtil';
 
 export default {
   data () {
@@ -81,6 +83,7 @@ export default {
     this.videoData = wx.getStorageSync('video_key');
     console.log('videoData',this.videoData);
     this.clearStorage();
+    showInterstitialAd('adunit-afe34c1c0045aaa0');
   },
 
   created () {

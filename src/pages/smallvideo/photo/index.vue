@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ad unit-id="adunit-14645bd6980f5af2" ad-type="video" ad-theme="white"></ad>
     <div v-if="photoData" class="photo-fr">
       <div class="desc">{{photoData.desc||''}}</div>
       <div class="photo-list">
@@ -17,6 +18,7 @@
 
 <script>
 import {request} from '../../../utils/request';
+import {showInterstitialAd} from '../../../utils/adUtil';
 
 export default {
   data () {
@@ -98,6 +100,8 @@ export default {
     this.photoData = wx.getStorageSync('photo_key');
     console.log('photoData',this.photoData);
     this.clearStorage();
+    //adunit-9f97b4a0fa9679cf
+    showInterstitialAd('adunit-9f97b4a0fa9679cf');
   },
 
   created () {

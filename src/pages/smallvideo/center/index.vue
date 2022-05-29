@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ad unit-id="adunit-53d63f3d3d446007" ad-type="video" ad-theme="white"></ad>
     <div v-if="productList" class="photo-fr">
       <div class="photo-list">
         <div class="photo-item" v-for="item in productList" :key="item" @tap="gotoDetail(item)" >
@@ -7,12 +8,14 @@
         </div>
       </div>
     </div>
+    <ad unit-id="adunit-f9576f85e5936d18"></ad>
   </div>
   
 </template>
 
 <script>
 import {request} from '../../../utils/request';
+import {showInterstitialAd} from '../../../utils/adUtil';
 
 export default {
   data () {
@@ -149,6 +152,11 @@ export default {
     this.query = wx.getStorageSync('ks_query');
     this.loadData(user,type)
     this.clearStorage();
+    // adunit-a1f206655426a53c
+    
+  },
+  onShow(){
+    showInterstitialAd('adunit-a1f206655426a53c');
   },
 
   created () {

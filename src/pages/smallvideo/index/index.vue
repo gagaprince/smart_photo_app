@@ -1,13 +1,16 @@
 <template>
   <div class="link-fr">
+    <ad unit-id="adunit-94416bd408899a96"></ad>
     <textarea :value="linkContent" maxlength="-1" @input="onInput" @blur="onBlur" class="link-text" placeholder="请输入视频链接，暂时只支持筷艏和钭垠"></textarea>
     <div class="link-btn" @tap="beginJx">立即解析</div>
     <div class="past-btn" @tap="pastContent">粘贴</div>
+    <div class="jiaocheng-btn" @tap="toJiaoCheng">查看教程</div>
   </div>
 </template>
 
 <script>
 import {request} from '../../../utils/request';
+import {showInterstitialAd} from '../../../utils/adUtil';
 
 export default {
   data () {
@@ -45,6 +48,10 @@ export default {
     jumptoVideoDetail(data){
       wx.setStorageSync('video_key',data);
       const url = `/pages/smallvideo/video/main`;
+      wx.navigateTo({url});
+    },
+    toJiaoCheng(){
+      const url = `/pages/smallvideo/learn/main`;
       wx.navigateTo({url});
     },
     jx(textContent) {
@@ -101,6 +108,10 @@ export default {
 
   onLoad(){
     // this.test();
+    
+  },
+  onShow(){
+    showInterstitialAd('adunit-ea9a41be010b8c4d');
   },
 
   created () {
@@ -115,8 +126,10 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top:30rpx;
     position: relative;
+  }
+  textarea{
+    margin-top:30rpx;
   }
   .link-text{
     background: #f6f6f6;
@@ -143,5 +156,18 @@ export default {
     right:10rpx;
     bottom: 150rpx;
     font-size: 30rpx;
+  }
+  .jiaocheng-btn{
+    width:150rpx;
+    height:150rpx;
+    color: #f6f6f6;
+    font-size: 32rpx;
+    text-align: center;
+    line-height: 150rpx;
+    border-radius: 75rpx;
+    position: fixed;
+    right:0;
+    bottom: 100rpx;
+    background: #000000;
   }
 </style>

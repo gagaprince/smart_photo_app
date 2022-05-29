@@ -1,4 +1,4 @@
-
+let timeout = null;
 const _showAdOnce = (adId,times)=>{
     // 在页面中定义插屏广告
     let interstitialAd = null
@@ -12,9 +12,13 @@ const _showAdOnce = (adId,times)=>{
     interstitialAd.onError((err) => {
         console.error(err)
         if(times>0){
-            setTimeout(()=>{
+            if(timeout){
+                clearTimeout(timeout);
+                timeout=null;
+            }
+            timeout = setTimeout(()=>{
                 _showAdOnce(adId,times-1);
-            },1000);
+            },2000);
         }
     })
     interstitialAd.onClose(() => {})
@@ -22,14 +26,20 @@ const _showAdOnce = (adId,times)=>{
 
     // 在适合的场景显示插屏广告
     if (interstitialAd) {
-    interstitialAd.show().catch((err) => {
-        console.error(err)
-        if(times>0){
-            setTimeout(()=>{
-                _showAdOnce(adId,times-1);
-            },1000);
-        }
-    })
+        setTimeout(()=>{
+            interstitialAd.show().catch((err) => {
+                console.error(err)
+                if(times>0){
+                    if(timeout){
+                        clearTimeout(timeout);
+                        timeout=null;
+                    }
+                    timeout = setTimeout(()=>{
+                        _showAdOnce(adId,times-1);
+                    },2000);
+                }
+            })
+        },1000);
     }
 }
 

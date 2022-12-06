@@ -1,7 +1,7 @@
 <template>
   <div v-if="videoData" class="video-fr">
     <ad unit-id="adunit-4ae01ae4bece7cbc" ad-type="video" ad-theme="white"></ad>
-    <video class="video-content" :src="videoData.videoUrl" :poster="videoData.cover"></video>
+    <video autoplay="true" class="video-content" :src="videoData.videoUrl" :poster="videoData.cover"></video>
     <div class="btn-fr">
       <div class="btn-save" @tap="saveVideo">保存视频{{showProgress}}</div>
       <div class="btn-cp" @tap="cpVideoLink">复制无水印链接</div>

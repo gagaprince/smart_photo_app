@@ -1,6 +1,7 @@
 <template>
   <div v-if="videoData" class="video-fr">
     <ad unit-id="adunit-4ae01ae4bece7cbc" ad-type="video" ad-theme="white"></ad>
+    <div class="desc">不能成功保存，可以复制无水印链接去浏览器下载</div>
     <video autoplay="true" class="video-content" :src="videoData.videoUrl" :poster="videoData.cover"></video>
     <div class="btn-fr">
       <div class="btn-save" @tap="saveVideo">保存视频{{showProgress}}</div>
@@ -93,6 +94,10 @@ export default {
 </script>
 
 <style scoped>
+  .desc{
+    padding: 20rpx;
+    border-top: 1rpx solid #f0f0f0;
+  }
   .video-fr{
     display: flex;
     flex-direction:column;

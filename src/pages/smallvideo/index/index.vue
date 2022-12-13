@@ -108,7 +108,7 @@ export default {
 
   onLoad(){
     // this.test();
-    
+    wx.showShareMenu()
   },
   onShow(){
     showInterstitialAd('adunit-ea9a41be010b8c4d');
